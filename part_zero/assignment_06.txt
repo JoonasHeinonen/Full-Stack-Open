@@ -1,0 +1,36 @@
+// Includes source code for WebSequence Diagrams for assignment 6.
+
+title New note in SPA
+
+selain->palvelin: HTTP GET https://https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: spa.html (HTML-koodi)
+selain->palvelin: HTTP GET https://https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: main.css (Tyylittelytiedosto)
+selain->palvelin: HTTP GET hhttps://https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: main.js (JavaScript)
+selain->palvelin: HTTP GET hhttps://https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: data.json
+selain->palvelin: HTTP GET hhttps://https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: favicon.ico
+
+note over selain:
+Renderöi ylläolevan
+Single Page App-
+verkkosovelluksen.
+end note
+
+note over selain:
+Klikataan uuden 
+muistiinpanon luonnin
+painiketta.
+end note
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+palvelin-->selain: [{ content: "x" }, ...]
+
+note over palvelin:
+Käsittelee tämän
+syötetyn datan status-
+koodilla 201 ilman
+uudelleenohjausta.
+end note
