@@ -13,6 +13,8 @@ This contains my assignemnts for Fullstack Open course provided by University of
     * Assignment 6 (Done. The files are 'assignment_06.png'. and 'assignment_06.txt'.)
 
 * Part One ( Osa 1):
-    * Part 1a ( Osa 1a):
+    * Part 1a and 1b ( Osa 1a ja 1b ):
         * Assignment 1.1 and 1.2 (Done. The folder of the project is 'course_information' React-project.)
+    * Part 1d ( Osa 1d):
+        * Assignment 1.6 and 1.7 (Done. The folder of the project is 'unicafe' React-project.)
     
