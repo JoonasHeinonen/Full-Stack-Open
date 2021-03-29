@@ -3,6 +3,8 @@
 ## In English:
 This contains my assignemnts for Fullstack Open course provided by University of Helsinki. This will include my learning journal in Finnish as well as the required assignments for each portion in this course.
 
+The completed assignemnts can be reviewed directly from commit history on the master branch in this Github repository.
+
 ## Assignments thus far pushed.
 * Part Zero ( Osa 0):
     * Assignment 1 (Done, but not required to be uploaded.)
@@ -14,7 +16,7 @@ This contains my assignemnts for Fullstack Open course provided by University of
 
 * Part One ( Osa 1):
     * Part 1a and 1b ( Osa 1a ja 1b ):
-        * Assignment 1.1 and 1.2 (Done. The folder of the project is 'course_information' React-project.)
+        * Assignment 1.1, 1.2, 1.3, 1.4 and 1.5 (Done. The folder of the project is 'course_information' React-project.)
     * Part 1d ( Osa 1d):
-        * Assignment 1.6, 1.7, 1.8, 1.9 and 1.10. (Done. The folder of the project is 'unicafe' React-project.)
+        * Assignment 1.6, 1.7, 1.8, 1.9, 1.10 and 1.11. (Done. The folder of the project is 'unicafe' React-project.)
     

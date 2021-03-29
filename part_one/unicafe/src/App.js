@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const All = (props) => {
   return (
     <div>
-      <p>all: {props.goods + props.neutrals + props.bads}</p>
+      <p>{props.goods + props.neutrals + props.bads}</p>
     </div>
   )
 }
@@ -11,7 +11,7 @@ const All = (props) => {
 const Average = (props) => {
   return (
     <div>
-      <p>average: {(props.goods + (props.neutrals * 0) + (props.bads * -1)) / (props.goods + props.neutrals + props.bads)}</p>
+      <p>{(props.goods + (props.neutrals * 0) + (props.bads * -1)) / (props.goods + props.neutrals + props.bads)}</p>
     </div>
   )
 }
@@ -19,7 +19,7 @@ const Average = (props) => {
 const PositiveProportion = (props) => {
   return (
     <div>
-      <p>average: {((props.goods) / (props.goods + props.neutrals + props.bads)) * 100} %</p>
+      <p>{((props.goods) / (props.goods + props.neutrals + props.bads)) * 100} %</p>
     </div>
   )
 }
@@ -27,7 +27,7 @@ const PositiveProportion = (props) => {
 const StatisticsLine = (props) => {
   return (
     <div>
-      <p>{props.name}: {props.value}</p>
+      <p>{props.value}</p>
     </div>
   )
 }
@@ -63,24 +63,76 @@ const Statistics = (props) => {
       <Button name ="Neutral" setValue={() => props.setAllNeutrals(props.allNeutrals + 1)}/>
       <Button name ="Bad" setValue={() => props.setAllBads(props.allBads + 1)}/>
       <h2>Statistics</h2>
-      <StatisticsLine name="Good" value={props.allGoods.length}/>
-      <StatisticsLine name="Neutral" value={props.allNeutrals.length}/>
-      <StatisticsLine name="Bad" value={props.allBads.length}/>
-      <All 
-        goods={props.allGoods.length} 
-        neutrals={props.allNeutrals.length} 
-        bads={props.allBads.length}
-      />
-      <Average 
-        goods={props.allGoods.length} 
-        neutrals={props.allNeutrals.length} 
-        bads={props.allBads.length}
-      />
-      <PositiveProportion 
-        goods={props.allGoods.length} 
-        neutrals={props.allNeutrals.length} 
-        bads={props.allBads.length}
-      />
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>Good</p>
+            </td>
+            <td>
+              <StatisticsLine value={props.allGoods.length}/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Neutral</p>
+            </td>
+            <td>
+              <StatisticsLine value={props.allNeutrals.length}/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Bad</p>
+            </td>
+            <td>
+              <StatisticsLine value={props.allBads.length}/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>In total</p>
+            </td>
+            <td>
+              <All 
+                goods={props.allGoods.length} 
+                neutrals={props.allNeutrals.length} 
+                bads={props.allBads.length}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Average</p>
+            </td>
+            <td>
+              <Average 
+                goods={props.allGoods.length} 
+                neutrals={props.allNeutrals.length} 
+                bads={props.allBads.length}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Positive</p>
+            </td>
+            <td>
+              <PositiveProportion 
+                goods={props.allGoods.length} 
+                neutrals={props.allNeutrals.length} 
+                bads={props.allBads.length}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
