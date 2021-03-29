@@ -24,6 +24,23 @@ const PositiveProportion = (props) => {
   )
 }
 
+const StatisticsLine = (props) => {
+  return (
+    <div>
+      <p>{props.name}: {props.value}</p>
+    </div>
+  )
+}
+
+const Button = (props) => {
+  return (
+    <button onClick={props.setValue}>
+      {props.name}
+    </button>
+  )
+}
+
+
 const Statistics = (props) => {
   if (props.allGoods.length === 0 &&
       props.allNeutrals.length === 0 &&
@@ -32,10 +49,9 @@ const Statistics = (props) => {
     return (
       <div>
         <h2>Unicafe</h2>
-        <button onClick={() => props.setAllGoods(props.allGoods + 1)}>Good</button>
-        <button onClick={() => props.setAllNeutrals(props.allNeutrals + 1)}>Neutral</button>
-        <button onClick={() => props.setAllBads(props.allBads + 1)}>Bad</button>
-        <h2>Statistics</h2>
+        <Button name ="Good" setValue={() => props.setAllGoods(props.allGoods + 1)}/>
+        <Button name ="Neutral" setValue={() => props.setAllNeutrals(props.allNeutrals + 1)}/>
+        <Button name ="Bad" setValue={() => props.setAllBads(props.allBads + 1)}/>
         <p>No feedback given.</p>
       </div>
     )
@@ -43,13 +59,13 @@ const Statistics = (props) => {
   return (
     <div>
       <h2>Unicafe</h2>
-      <button onClick={() => props.setAllGoods(props.allGoods + 1)}>Good</button>
-      <button onClick={() => props.setAllNeutrals(props.allNeutrals + 1)}>Neutral</button>
-      <button onClick={() => props.setAllBads(props.allBads + 1)}>Bad</button>
+      <Button name ="Good" setValue={() => props.setAllGoods(props.allGoods + 1)}/>
+      <Button name ="Neutral" setValue={() => props.setAllNeutrals(props.allNeutrals + 1)}/>
+      <Button name ="Bad" setValue={() => props.setAllBads(props.allBads + 1)}/>
       <h2>Statistics</h2>
-      <p>Good: {props.allGoods.length}</p>
-      <p>Neutral: {props.allNeutrals.length}</p>
-      <p>Bad: {props.allBads.length}</p>
+      <StatisticsLine name="Good" value={props.allGoods.length}/>
+      <StatisticsLine name="Neutral" value={props.allNeutrals.length}/>
+      <StatisticsLine name="Bad" value={props.allBads.length}/>
       <All 
         goods={props.allGoods.length} 
         neutrals={props.allNeutrals.length} 
