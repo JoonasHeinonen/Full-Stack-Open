@@ -18,5 +18,5 @@ The completed assignemnts can be reviewed directly from commit history on the ma
     * Part 1a and 1b ( Osa 1a ja 1b ):
         * Assignments 1.1, 1.2, 1.3, 1.4 and 1.5 (Done. The folder of the project is 'course_information' React-project.)
     * Part 1d ( Osa 1d):
-        * Assignments 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12 and 1.13. (Done. The folder of the project is 'unicafe' React-project.)
+        * Assignments 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13 and 1.14. (Done. The folder of the project is 'unicafe' React-project.)
     

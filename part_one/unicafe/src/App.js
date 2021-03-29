@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
 
+const MostPopularAnecdote = (props) => {
+  return (
+    <div>
+      <h2>Anecdote with most votes</h2>
+      <p>{props.value}</p>
+      <p>{props.index} anecdote has {props.points} points</p>
+    </div>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -17,7 +27,7 @@ const App = () => {
       .split('')
       .map(parseFloat)
   );
-
+  const [popular, setPopular] = useState(4);
   
   let selectRandom = () => {
     let select = Math.floor(Math.random() * anecdotes.length);
@@ -29,16 +39,22 @@ const App = () => {
     const copy = [...points]
     copy[selectedAnecdote] += 1;
     setPoints(copy);
+
+    if (copy[selectedAnecdote] > points[popular]) {
+      setPopular(selectedAnecdote)
+    }
   }
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <div>
         {anecdotes[selected]}
       </div>
       <button onClick={() => { vote (selected)}}>vote</button>
       <button onClick={selectRandom}>next anecdote</button>
       <p>Current quote {selected} has {points[selected]} points. </p>
+      <MostPopularAnecdote value={anecdotes[popular]} index={selected} points={points[popular]} />
     </div>
   )
 }
