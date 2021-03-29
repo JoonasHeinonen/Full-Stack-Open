@@ -25,6 +25,21 @@ const PositiveProportion = (props) => {
 }
 
 const Statistics = (props) => {
+  if (props.allGoods.length === 0 &&
+      props.allNeutrals.length === 0 &&
+      props.allBads.length === 0
+  ) {
+    return (
+      <div>
+        <h2>Unicafe</h2>
+        <button onClick={() => props.setAllGoods(props.allGoods + 1)}>Good</button>
+        <button onClick={() => props.setAllNeutrals(props.allNeutrals + 1)}>Neutral</button>
+        <button onClick={() => props.setAllBads(props.allBads + 1)}>Bad</button>
+        <h2>Statistics</h2>
+        <p>No feedback given.</p>
+      </div>
+    )
+  }
   return (
     <div>
       <h2>Unicafe</h2>
