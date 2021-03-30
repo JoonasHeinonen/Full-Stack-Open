@@ -22,4 +22,4 @@ The completed assignemnts can be reviewed directly from commit history on the ma
 
 * Part Two ( Osa 2 ):
     * Part 2a ( Osa 2a ):
-        * Assignment 2.1 (Done. The folder of the project is 'courseinformation' React-project.)
+        * Assignment 2.1 and 2.2 (Done. The folder of the project is 'courseinformation' React-project.)
