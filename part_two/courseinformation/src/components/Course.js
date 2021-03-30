@@ -20,8 +20,9 @@ const Total = (props) => {
     const exercises = props.courses;
 
     let total = exercises.reduce(function (all, part) {
+        console.log("What is happening here: ", all, part)
         return all + part.exercises
-    }, 0)
+    }, 0);
 
     return (
         <div>
