@@ -8,6 +8,7 @@ const App = (props) => {
 
   const addNote = (e) => {
     e.preventDefault();
+
     const noteObject = {
       content: newNote,
       date: new Date().toISOString(),
