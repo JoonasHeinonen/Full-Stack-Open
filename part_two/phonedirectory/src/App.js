@@ -3,15 +3,20 @@ import Contact from './components/Person';
 
 const App = () => {
   const [ persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { 
+      name: 'Arto Hellas',
+      number: '040-1231244'
+    }
   ]) 
   const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber ] = useState('')
 
   const addPerson = (e) => {
     e.preventDefault();
 
     const personObject = {
       name: newName,
+      number: newNumber,
       id: persons.length + 1,
     }
 
@@ -27,6 +32,10 @@ const App = () => {
     setNewName(e.target.value);
   }
 
+  const handeNumberChange = (e) => {
+    setNewNumber(e.target.value);
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -36,13 +45,18 @@ const App = () => {
             <input 
               value={newName} 
               onChange={handleNameChange}
-            />
+            /><br/>
+            number: 
+            <input 
+              value={newNumber} 
+              onChange={handeNumberChange}
+            /><br/>
             <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       {persons.map(person => 
-        <Contact key={person.name} name={person.name} />
+        <Contact key={person.name} name={person.name} number={person.number} />
       )}
     </div>
   )
