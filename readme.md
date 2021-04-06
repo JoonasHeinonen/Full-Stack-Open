@@ -28,4 +28,4 @@ The completed assignemnts can be reviewed directly from commit history on the ma
     * Part 2c ( Osa 2c ):
         * Assignment 2.11. (Done. The folder for the project is 'phonedirectory' React-project. Tried to complete the Countries assignment, but proved too hard.)
     * Part 2d ( Osa 2d ):
-        * Assignemnts 2.15. (Done. The folder for the project is 'phonedirectory' React-project.)
+        * Assignemnts 2.15 and 2.16. (Done. The folder for the project is 'phonedirectory' React-project.)
