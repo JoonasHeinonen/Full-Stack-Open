@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import AllContacts from './components/AllContacts';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
+
 import personsService from './services/persons';
 
 const App = () => {
@@ -31,14 +31,39 @@ const App = () => {
     }
 
     if (persons.some((persons) => persons.name === personObject.name)) {
-      alert(`${newName} is already added to phonebook`);
+      if (window.confirm(`${newName} is already added to phonebook`)) {
+        personsService
+          .update(personObject)
+            .then(person => {
+              setNewNumber('');
+            });
+      } else {
+        alert(`${newName} `)
+      }
     } else {
       personsService
         .create(personObject)
           .then(person => {
-            setPersons(persons.concat(person))
-            setNewName('')
+            setPersons(persons.concat(person));
+            setNewName('');
+            setNewNumber('');
           });
+    }
+  }
+
+  const deleteEntity = (name, id) => {
+    if (window.confirm(`Do you want to delete ${name} from the phone directory?`)) {
+      personsService
+        .remove(id)
+        .then(() => {
+          setPersons(persons.filter((person) => person.id !== id));
+          alert(`Deleted ${name} successfully from the phone directory!`);
+          setNewName('');
+          setNewNumber('');
+        })
+        .catch(error => {
+          alert(`Problems deleting the ${name} from the records.`);
+        });
     }
   }
 
@@ -68,10 +93,13 @@ const App = () => {
         numberHandler={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <AllContacts persons={persons} filter={filter} />
-    </div>
+      <AllContacts 
+        persons={persons} 
+        filter={filter} 
+        deleteEntity={deleteEntity}
+      />
+      </div>
   )
-
 }
 
-export default App
+export default App;
