@@ -1,0 +1,23 @@
+{
+  "name": "notebackend",
+  "version": "1.0.0",
+  "description": "Backend for note saving application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "backend",
+    "node",
+    "npm"
+  ],
+  "author": "Joonas Heinonen",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
