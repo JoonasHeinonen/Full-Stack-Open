@@ -35,9 +35,16 @@ let persons = [
         id: 6
     }
 ];
+let date = new Date();
 
 app.get('/', (req, res) => {
     res.send('<h1>Phonedirectory</h1>');
+})
+
+app.get('/info', (req, res) => {
+    res.send(`<p>Phonebook currently has ${persons.length} records.</p>` + 
+             `<p>Date of the query: ${date}`
+    );
 })
 
 app.get('/api/persons', (req, res) => {
