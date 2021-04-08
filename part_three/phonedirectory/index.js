@@ -4,6 +4,8 @@ const express = require('express');
 const PORT = 8000;
 const app = express();
 
+app.use(express.json());
+
 let persons = [
     {
         name: "Arto Hellas",
@@ -38,6 +40,13 @@ let persons = [
 ];
 let date = new Date();
 
+const generateId = () => {
+    const maxId = persons.length > 0
+      ? Math.max(...persons.map(p => p.id))
+      : 0
+    return maxId + 1
+}
+
 app.get('/', (req, res) => {
     res.send('<h1>Phonedirectory</h1>');
 })
@@ -61,6 +70,21 @@ app.get('/api/persons/:id', (req, res) => {
     } else {
         res.status(404).send('<p>404: Resource not found...');
     }
+});
+
+app.post('/api/persons', (req, res) => {
+    const body = req.body;
+
+    console.log(`Body: ${body}`);
+
+    const person = {
+        name: body.name,
+        number: body.number,
+        id: generateId(),
+    }
+
+    persons = persons.concat(person);
+    res.json(person);
 });
 
 app.delete('/api/persons/:id', (req, res) => {
