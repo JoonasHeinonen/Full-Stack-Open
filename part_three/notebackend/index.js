@@ -1,9 +1,10 @@
 const express = require('express');
 
-const port = 3001;
 const app = express();
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 
 let notes = [
     {
@@ -82,6 +83,7 @@ app.delete('/api/notes/:id', (req, res) => {
     res.status(204).end();
 });
 
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log(`Server running on: 127.0.0.1:${port}`);
 });
