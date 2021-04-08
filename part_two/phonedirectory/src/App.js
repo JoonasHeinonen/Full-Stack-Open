@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import AllContacts from './components/AllContacts';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
+import Notification from './components/Notification';
+import Error from './components/Error';
 
 import personsService from './services/persons';
 
@@ -10,6 +12,8 @@ const App = () => {
   const [ newName, setNewName ] = useState('');
   const [ newNumber, setNewNumber ] = useState('');
   const [ filter, setFilter ] = useState('');
+  const [ notification, setNotification] = useState(null);
+  const [ error, setError] = useState(null);
 
   useEffect(() => {
     personsService
@@ -21,7 +25,7 @@ const App = () => {
 
   console.log('render', persons.length, 'persons')
 
-  const addPerson = (e) => {
+  const addPerson = (e, id) => {
     e.preventDefault();
 
     const personObject = {
@@ -30,12 +34,12 @@ const App = () => {
       id: persons.length + 1,
     }
 
-    if (persons.some((persons) => persons.name === personObject.name)) {
-      if (window.confirm(`${newName} is already added to phonebook`)) {
+    if (persons.some((person) => person.name === personObject.name)) {
+      if (window.confirm(`${newName} is already added to phonebook! Would you like to change update the phonenumber?`)) {
         personsService
-          .update(personObject)
-            .then(person => {
-              setNewNumber('');
+          .update(personObject.id, personObject)
+            .then(() => {
+              alert('Gone here!');
             });
       } else {
         alert(`${newName} `)
@@ -48,6 +52,12 @@ const App = () => {
             setNewName('');
             setNewNumber('');
           });
+      setNotification(
+        `${newName} added to the phonedirectory successfully!`
+      )
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
     }
   }
 
@@ -62,7 +72,12 @@ const App = () => {
           setNewNumber('');
         })
         .catch(error => {
-          alert(`Problems deleting the ${name} from the records.`);
+          setError(
+            `Problems deleting the ${name} from the records.`
+          )
+          setTimeout(() => {
+            setError(null)
+          }, 5000)
         });
     }
   }
@@ -83,6 +98,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification notification={notification} />
+      <Error error={error} />
       <Filter filter={filter} onChangeHandler={handleFilter} />
       <h2>Add a new</h2>
       <PersonForm 
