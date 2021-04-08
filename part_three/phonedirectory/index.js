@@ -75,12 +75,28 @@ app.get('/api/persons/:id', (req, res) => {
 app.post('/api/persons', (req, res) => {
     const body = req.body;
 
-    console.log(`Body: ${body}`);
+    if (!body.name) {
+        return res.status(400).json({ 
+          error: 'Name not defined.' 
+        })
+    }
+
+    if (!body.number) {
+        return res.status(400).json({ 
+          error: 'Number not defined.' 
+        })
+    }
 
     const person = {
         name: body.name,
         number: body.number,
         id: generateId(),
+    }
+
+    if (persons.some((p) => p.name === person.name)) {
+        return res.status(400).json({ 
+          error: 'Name is already existing in the records.' 
+        });
     }
 
     persons = persons.concat(person);
