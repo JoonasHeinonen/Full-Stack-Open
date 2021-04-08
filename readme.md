@@ -34,4 +34,4 @@ The completed assignemnts can be reviewed directly from commit history on the ma
 
 * Part Three ( Osa 3, folder 'part_three' ):
     * Part 3a ( Osa 3a ):
-        * Assignments 3.1, 3.2, 3.3, 3.4, 3.5 and 3.6. (Done. The folder for the project is 'phonedirectory' Express-project.)
+        * Assignments 3.1, 3.2, 3.3, 3.4, 3.5, 3.6 and 3.7. (Done. The folder for the project is 'phonedirectory' Express-project.)
