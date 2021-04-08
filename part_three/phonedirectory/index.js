@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 
 const PORT = 8000;
@@ -60,6 +61,13 @@ app.get('/api/persons/:id', (req, res) => {
     } else {
         res.status(404).send('<p>404: Resource not found...');
     }
+});
+
+app.delete('/api/persons/:id', (req, res) => {
+    const id = Number(req.params.id);
+    persons = persons.filter(person => person.id !== id);
+
+    res.status(204).end();
 });
 
 app.listen(PORT, () => {
