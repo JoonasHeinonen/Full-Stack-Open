@@ -18,50 +18,16 @@ app.use(morgan('tiny'));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'));
 app.use(cors());
 
-let persons = [
-    {
-        name: "Arto Hellas",
-        number: "040-123456",
-        id: 1
-    },
-    {
-        name: "Ada Lovelace",
-        number: "39-44-5323523",
-        id: 2
-    },
-    {
-        name: "Dan Abramov",
-        number: "12-43-234345",
-        id: 3
-    },
-    {
-        name: "Mary Poppendieck",
-        number: "39-23-6423122",
-        id: 4
-    },
-    {
-        name: "Murray Philips",
-        number: "39-22-542577",
-        id: 5
-    },
-    {
-        name: "Anton Girdeux",
-        number: "33-205566",
-        id: 6
-    },
-    {
-        name: "Angela Cross",
-        number: "43-1413631",
-        id: 7
-    }
-];
-let date = new Date();
+const errorHandler = (error, req, res, next) => {
+    console.error(error.message);
 
-const generateId = () => {
-    const maxId = persons.length > 0
-      ? Math.max(...persons.map(p => p.id))
-      : 0
-    return maxId + 1
+    if (error.name === 'CastError') {
+        return res.status(400).send({ error: 'malformatted id' });
+    } else {
+        return res.status(400).send({ error: error.message });
+    }
+
+    next(error);
 }
 
 app.get('/', (req, res) => {
@@ -80,9 +46,12 @@ app.get('/api/persons', (req, res) => {
     });
 });
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
     Person.findById(request.params.id).then(person => {
         response.json(person)
+    })
+    .catch(error => {
+        next(error);
     });
 })
 
@@ -111,6 +80,21 @@ app.post('/api/persons', (req, res) => {
     });
 });
 
+app.put('/api/persons/:id', (req, res, next) => {
+    const body = req.body;
+
+    const person = {
+        name: body.name,
+        number: body.number
+    };
+
+    Person.findByIdAndUpdate(req.params.id, person, { new: true })
+        .then(updatedPerson => {
+            response.json(updatedPerson)
+        })
+        .catch(error => next(error))
+});
+
 app.delete('/api/persons/:id', (req, res, next) => {
     Person.findByIdAndRemove(req.params.id)
         .then(result => {
@@ -119,6 +103,8 @@ app.delete('/api/persons/:id', (req, res, next) => {
         })
         .catch(error => next(error));
 });
+
+app.use(errorHandler);
 
 const port = process.env.PORT;
 app.listen(port, () => {
