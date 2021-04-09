@@ -111,11 +111,13 @@ app.post('/api/persons', (req, res) => {
     });
 });
 
-app.delete('/api/persons/:id', (req, res) => {
-    const id = Number(req.params.id);
-    persons = persons.filter(person => person.id !== id);
-
-    res.status(204).end();
+app.delete('/api/persons/:id', (req, res, next) => {
+    Person.findByIdAndRemove(req.params.id)
+        .then(result => {
+            res.status(204).end();
+            console.log(req.params.id);
+        })
+        .catch(error => next(error));
 });
 
 const port = process.env.PORT;
