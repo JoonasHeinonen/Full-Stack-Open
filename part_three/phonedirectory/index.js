@@ -101,10 +101,10 @@ app.post('/api/persons', (req, res) => {
         })
     }
 
-    const person = {
+    const person = new Person({
         name: body.name,
         number: body.number,
-    }
+    });
 
     person.save().then(savedPerson => {
         response.json(savedPerson)
