@@ -44,6 +44,11 @@ let persons = [
         name: "Anton Girdeux",
         number: "33-205566",
         id: 6
+    },
+    {
+        name: "Angela Cross",
+        number: "43-1413631",
+        id: 7
     }
 ];
 let date = new Date();

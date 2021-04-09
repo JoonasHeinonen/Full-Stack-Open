@@ -1,10 +1,10 @@
 {
-  "name": "datacollectionapp",
+  "name": "phonedirectory",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.5",
+    "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "react": "^17.0.2",
@@ -17,11 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json",
-    "build:ui": "rm -rf build && cd ./datacollectionapp/ && npm run build --prod && cp -r build ../notebackend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
-    "logs:prod": "heroku logs --tail"
+    "server": "json-server -p3001 --watch db.json"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +39,5 @@
   },
   "devDependencies": {
     "json-server": "^0.16.3"
-  },
-  "proxy": "http://localhost:3001"
+  }
 }
