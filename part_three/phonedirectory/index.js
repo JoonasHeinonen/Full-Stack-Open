@@ -6,7 +6,6 @@ morgan.token('data', function (req, res) {
     return JSON.stringify(req.body);
 });
 
-const PORT = 8000;
 const app = express();
 
 app.use(express.json());
@@ -123,6 +122,7 @@ app.delete('/api/persons/:id', (req, res) => {
     res.status(204).end();
 });
 
-app.listen(PORT, () => {
-    console.log(`Application running at: 127.0.0.1:${PORT}`);
-})
+const port = process.env.PORT || 3002;
+app.listen(port, () => {
+    console.log(`Server running on: 127.0.0.1:${port}`);
+});
