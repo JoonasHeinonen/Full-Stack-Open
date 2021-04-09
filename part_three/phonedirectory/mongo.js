@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const Person = require('./models/Person');
+
 if (process.argv.length < 3) {
     console.log('Provide a password as an argument.');
     process.exit(1);
@@ -22,27 +24,21 @@ mongoose.connect(
     }
 );
 
-const contactSchema = new mongoose.Schema({
-    name: String,
-    number: String,
-});
-const Contact = mongoose.model('Contact', contactSchema);
-
-const contact = new Contact({
+const person = new Person({
     name: name,
     number: number
 });
 
 if (name === undefined || number === undefined) {
-    Contact.find({}).then(result => {
-        result.forEach(contact => {
-            console.log(contact);
+    Person.find({}).then(result => {
+        result.forEach(person => {
+            console.log(person);
         });
         mongoose.connection.close();
     });
 } else {
-    contact.save().then(response => {
-        console.log('Contact saved!');
+    person.save().then(response => {
+        console.log('Person saved!');
         mongoose.connection.close();
     })
 }

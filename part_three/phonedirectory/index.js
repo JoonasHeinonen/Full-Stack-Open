@@ -1,6 +1,10 @@
+require('dotenv').config()
+
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+
+const Person = require('./models/Person');
 
 morgan.token('data', function (req, res) {
     return JSON.stringify(req.body);
@@ -71,19 +75,16 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-    res.json(persons);
+    Person.find({}).then(persons => {
+        res.json(persons)
+    });
 });
 
-app.get('/api/persons/:id', (req, res) => {
-    const id = Number(req.params.id);
-    const person = persons.find(person => person.id === id);
-
-    if (person) {
-        res.json(person);
-    } else {
-        res.status(404).send('<p>404: Resource not found...');
-    }
-});
+app.get('/api/persons/:id', (request, response) => {
+    Person.findById(request.params.id).then(person => {
+        response.json(person)
+    });
+})
 
 app.post('/api/persons', (req, res) => {
     const body = req.body;
@@ -103,17 +104,11 @@ app.post('/api/persons', (req, res) => {
     const person = {
         name: body.name,
         number: body.number,
-        id: generateId(),
     }
 
-    if (persons.some((p) => p.name === person.name)) {
-        return res.status(400).json({ 
-          error: 'Name is already existing in the records.' 
-        });
-    }
-
-    persons = persons.concat(person);
-    res.json(person);
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    });
 });
 
 app.delete('/api/persons/:id', (req, res) => {
@@ -123,7 +118,7 @@ app.delete('/api/persons/:id', (req, res) => {
     res.status(204).end();
 });
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`Server running on: 127.0.0.1:${port}`);
 });
