@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const express = require('express');
 const morgan = require('morgan');
@@ -25,52 +25,52 @@ const errorHandler = (error, req, res, next) => {
     if (error.name === 'CastError') {
         return res.status(400).send({ error: 'malformatted id' });
     } else if (error.name === 'ValidationError') {
-        return res.status(400).json({ error: error.message })
+        return res.status(400).json({ error: error.message });
     } else {
         return res.status(400).send({ error: error.message });
     }
 
     next(error);
-}
+};
 
 app.get('/', (req, res) => {
     res.send('<h1>Phonedirectory</h1>');
-})
+});
 
 app.get('/info', (req, res) => {
     res.send(`<p>Phonebook currently has ${persons.length} records.</p>` + 
              `<p>Date of the query: ${date}`
     );
-})
+});
 
 app.get('/api/persons', (req, res) => {
     Person.find({}).then(persons => {
-        res.json(persons)
+        res.json(persons);
     });
 });
 
 app.get('/api/persons/:id', (request, response, next) => {
     Person.findById(request.params.id).then(person => {
-        response.json(person)
+        response.json(person);
     })
-    .catch(error => {
-        next(error);
-    });
-})
+        .catch(error => {
+            next(error);
+        });
+});
 
 app.post('/api/persons', (req, res, next) => {
     const body = req.body;
 
     if (!body.name) {
-        return res.status(400).json({ 
-          error: 'Name not defined.' 
-        })
+        return res.status(400).json({
+            error: 'Name not defined.'
+        });
     }
 
     if (!body.number) {
-        return res.status(400).json({ 
-          error: 'Number not defined.' 
-        })
+        return res.status(400).json({
+            error: 'Number not defined.'
+        });
     }
 
     const person = new Person({
@@ -81,10 +81,10 @@ app.post('/api/persons', (req, res, next) => {
     person
         .save()
         .then(savedPerson => {
-            savedPerson.toJSON()
+            savedPerson.toJSON();
         })
         .then(savedAndFormattedPerson => {
-            response.json(savedAndFormattedPerson)
+            response.json(savedAndFormattedPerson);
         })
         .catch(error => next(error));
 });
@@ -106,7 +106,7 @@ app.put('/api/persons/:id', (req, res, next) => {
 
 app.delete('/api/persons/:id', (req, res, next) => {
     Person.findByIdAndRemove(req.params.id)
-        .then(result => {
+        .then((result )=> {
             res.status(204).end();
             console.log(req.params.id);
         })

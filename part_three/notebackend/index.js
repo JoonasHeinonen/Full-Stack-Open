@@ -1,10 +1,9 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
 
 const Note = require('./models/note');
-const { response } = require('express');
 
 const app = express();
 
@@ -20,11 +19,11 @@ const errorHandler = (error, req, res, next) => {
     }
 
     next(error);
-}
+};
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static('build'))
+app.use(express.static('build'));
 
 app.get('/', (req, res) => {
     res.send(
@@ -34,8 +33,8 @@ app.get('/', (req, res) => {
 
 app.get('/api/notes', (req, res) => {
     Note.find({}).then(notes => {
-        res.json(notes)
-    })
+        res.json(notes);
+    });
 });
 
 
@@ -59,7 +58,7 @@ app.post('/api/notes', (req, res, next) => {
             savedNote.toJSON()
         )
         .then(savedAndFormattedNote => {
-            res.json(savedAndFormattedNote)
+            res.json(savedAndFormattedNote);
         })
         .catch(error => 
             next(error)
@@ -88,15 +87,15 @@ app.put('/api/notes/:id', (req, res, next) => {
 
     Note.findByIdAndUpdate(req.params.id, note, { new: true })
         .then(updatedNote => {
-            res.json(updatedNote)
+            res.json(updatedNote);
         })
-        .catch(error => next(error))
+        .catch(error => next(error));
 });
 
 app.delete('/api/notes/:id', (req, res, next) => {
     Note.findByIdAndRemove(req.params.id)
         .then(result => {
-            res.status(204).end()
+            res.status(204).end();
         })
         .catch(error => next(error));
 });
