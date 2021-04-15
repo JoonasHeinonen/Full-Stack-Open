@@ -46,3 +46,7 @@ The completed assignemnts can be reviewed directly from commit history on the ma
     * Part 3d ( Osa 3d ):
         * Assignments 3.19 and 3.22. (Done. The folder for the project is 'phonedirectory' Express-project. The Heroku build url is: 
         https://phonedirectory-joonasheinonen.herokuapp.com/)
+
+* Part Four ( Osa 4, folder 'part_four'  ):
+    * Part 4a ( Osa 4a ):
+        * Assignment 4.1 (Done. The folder for the project is 'blogapp' Express-project.)
