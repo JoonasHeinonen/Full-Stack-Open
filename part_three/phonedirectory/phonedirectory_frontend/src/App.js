@@ -47,17 +47,15 @@ const App = () => {
     } else {
       personsService
         .create(personObject)
-          .then(person => {
+          .then((person) => {
             setPersons(persons.concat(person));
             setNewName('');
             setNewNumber('');
           });
-      setNotification(
-        `${newName} added to the phonedirectory successfully!`
-      )
       setTimeout(() => {
-        setNotification(null)
-      }, 5000)
+        setNotification(null);
+        setError(null);
+      }, 5000);
     }
   }
 
