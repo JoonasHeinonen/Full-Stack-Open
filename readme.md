@@ -50,3 +50,5 @@ The completed assignemnts can be reviewed directly from commit history on the ma
 * Part Four ( Osa 4, folder 'part_four'  ):
     * Part 4a ( Osa 4a ):
         * Assignments 4.1, 4.2, 4.3 and 4.4. (Done. The folder for the project is 'blogapp' Express-project.)
+    * Part 4b ( Osa 4b ):
+        * Assignemnts 4.8 and 4.9. (Done. The folder for the project is 'blogapp' Express-project.)
