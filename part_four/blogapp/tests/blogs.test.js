@@ -3,6 +3,8 @@ const supertest = require('supertest');
 const app = require('../app');
 const helper = require('./blog_test_helper');
 
+const Blog = require('../models/Blog');
+
 const api = supertest(app);
 
 describe('when there is initially some blogs saved', () => {
@@ -48,6 +50,27 @@ describe('when there is initially some blogs saved', () => {
         expect(titles).toContain(
             'Test blog added with async/await function'
         );
+    });
+
+    test('if likes aren\t given set zero', async() => {
+        const newBlog = helper.nonExistingLikes;
+
+        expect(newBlog).toNotContain(
+            newBlog.likes
+        );
+    });
+
+    test('add if all fields are included', async() => {
+        const newBlog = new Blog({ });
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+
+        const blogsAtEnd = await helper.blogsInDb();
+        expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
     });
 });
 

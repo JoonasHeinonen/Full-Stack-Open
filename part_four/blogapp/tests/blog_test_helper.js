@@ -22,7 +22,30 @@ const blogsInDb = async() => {
     return blogs.map(blog => blog.toJSON());
 };
 
+const nonExistingLikes = async() => {
+    const blog = new Blog(
+        { 
+            title: 'if/else for zero likes',
+            author: 'test-creator_two',
+            url: 'localhost:3003/api/blogs',
+        }
+    );
+
+    await blog.save();
+    await blog.remove();
+
+    return blog.likes = 0;
+};
+
+const blogWithNoFields = async() => {
+    const blog = new Blog({});
+    return blog.toJSON();
+};
+
+
 module.exports = {
     initialBlogs,
-    blogsInDb
+    blogsInDb,
+    nonExistingLikes,
+    blogWithNoFields
 };
