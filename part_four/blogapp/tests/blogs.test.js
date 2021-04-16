@@ -19,12 +19,35 @@ describe('when there is initially some blogs saved', () => {
         expect(response.body).toHaveLength(helper.initialBlogs.length)
     });
 
-    test('the identifier is field "id"', async () => {
+    test('the identifier is field "id"', async() => {
         const response = await api.get('/api/blogs');
 
         response.body.forEach(blog => {
             expect(blog.id).toBeDefined();
         });
+    });
+
+    test('that a blog can be added via http post', async() => {
+        const newBlog = {
+            title: 'Test blog added with async/await function',
+            author: 'test-creator',
+            url: 'localhost:3003/api/blogs',
+            likes: 0
+        };
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(201)
+            .expect('Content-Type', /application\/json/);
+
+        const blogsAtEnd = await helper.blogsInDb();
+        expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1);
+    
+        const titles = blogsAtEnd.map(b => b.title);
+        expect(titles).toContain(
+            'Test blog added with async/await function'
+        );
     });
 });
 
