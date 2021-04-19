@@ -1,9 +1,8 @@
 module.exports = {
     'env': {
+        'browser': true,
         'commonjs': true,
-        'es2021': true,
-        'node': true,
-        'jest': true
+        'es2021': true
     },
     'extends': 'eslint:recommended',
     'parserOptions': {
@@ -27,10 +26,15 @@ module.exports = {
             'always'
         ]
     },
-    'globals': {
-        'process': true
-    },
-    "jest": {
-        "testEnvironment": "node"
-    }
+    'overrides': [
+        {
+            'files': [
+                '**/*.spec.js',
+                '**/*.spec.jsx'
+            ],
+            'env': {
+                'jest': true
+            }
+        }
+    ]
 };
