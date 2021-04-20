@@ -3,11 +3,28 @@ const Blog = require('../models/Blog');
 const User = require('../models/User');
 
 blogRouter.get('/', async(req, res) => {
-    Blog
-        .find({})
-        .then(blogs => {
-            res.json(blogs);
-        });
+    const blogs = await Blog
+        .find({}).populate('user', { username: 1, name: 1 });
+    
+    res.json(blogs.map(blog => blog.toJSON()));
+});
+
+blogRouter.post('/', async(req, res, next) => {
+    const body = req.body;
+    const user = await User.findById(body.user);
+
+    const blog = new Blog({
+        title: body.title,
+        url: body.url,
+        likes: 0,
+        user: user._id,
+    });
+
+    const savedBlog = await blog.save();
+    user.blogs = user.blogs.concat(savedBlog._id);
+    await user.save();
+
+    res.json(savedBlog.toJSON());
 });
 
 blogRouter.put('/:id', async(req, res, next) => {
@@ -25,28 +42,6 @@ blogRouter.put('/:id', async(req, res, next) => {
 blogRouter.delete('/:id', async(req, res, next) => {
     await Blog.findByIdAndRemove(req.params.id);
     res.status(204).end();
-});
-
-blogRouter.post('/', async(req, res, next) => {
-    const body = req.body;
-    const user = await User.findById(body.userId);
-
-    console.log('User ID: ', user);
-
-    const blog = new Blog({
-        title: body.title,
-        author: user._id,
-        url: body.url,
-        likes: 0
-    });
-
-    const savedBlog = await blog.save();
-    console.log('Saved blog: ', savedBlog._id);
-
-    user.blogs = user.blogs.concat(savedBlog._id);
-    await user.save();
-
-    res.json(savedBlog.toJSON());
 });
 
 module.exports = blogRouter;
