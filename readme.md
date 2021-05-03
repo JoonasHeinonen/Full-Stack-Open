@@ -55,4 +55,4 @@ The completed assignemnts can be reviewed directly from commit history on the ma
 
 * Part Four ( Osa 5, folder 'part_five'  ):
     * Part 5a ( Osa 5a ):
-        * Assignments 5.1 and 5.2. (Done. The folder for the project is in 'blogapp' with the foldername 'bloglist-frontend'.)
+        * Assignments s5.1 and 5.2. (Done. The folder for the project is in 'blogapp' with the foldername 'bloglist-frontend'.)
