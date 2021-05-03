@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
+import Notification from './components/Notification';
+import Error from './components/Error';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
 const App = () => {
     const [blogs, setBlogs] = useState([]);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [notificationMessage, setNotificationMessage] = useState(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [user, setUser] = useState(null);
@@ -30,45 +34,79 @@ const App = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const user = await loginService.login({
-            username, password
-        });
-
-        window.localStorage.setItem(
-            'loggedBlogappUser', JSON.stringify(user)
-        );
-
-        blogService.setToken(user.token);
-        setUser(user);
-        setUsername('');
-        setPassword('');
+        try {
+            const user = await loginService.login({
+                username, password
+            });
+    
+            window.localStorage.setItem(
+                'loggedBlogappUser', JSON.stringify(user)
+            );
+    
+            blogService.setToken(user.token);
+            setUser(user);
+            setUsername('');
+            setPassword('');
+    
+            setNotificationMessage(`${user.username} logged in!`);
+            setTimeout(() => {
+                setNotificationMessage(null);
+            }, 5000);
+        } catch (exception) {
+            setErrorMessage('Credentials are wrong! Either username or password is incorrect.');
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 5000);
+        }
     };
 
     const handleLogout = async (e) => {
         e.preventDefault();
-        console.log(window.localStorage);
 
-        window.localStorage.removeItem('loggedBlogappUser');
-        setUser(null);
+        try {
+            window.localStorage.removeItem('loggedBlogappUser');
+            setUser(null);
+            setNotificationMessage('User logged out!');
+            setTimeout(() => {
+                setNotificationMessage(null);
+            }, 5000);
+        } catch (exception) {
+            setErrorMessage(`Logging out was insuccessful.`);
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 5000);
+        }
     };
 
     const createBlog = async (e) => {
         e.preventDefault();
 
-        const blog = {
-            user: user,
-            title: title,
-            author: author,
-            url: url
-        };
+        try {
+            const blog = {
+                user: user,
+                title: title,
+                author: author,
+                url: url
+            };
+    
+            const auth = user.token;
+    
+            const newBlog = await blogService.create(blog, auth);
+            setBlogs(blogs.concat(newBlog));
+            setTitle('');
+            setAuthor('');
+            setUrl('');
 
-        const auth = user.token;
-
-        const newBlog = await blogService.create(blog, auth);
-        setBlogs(blogs.concat(newBlog));
-        setTitle('');
-        setAuthor('');
-        setUrl('');
+            setNotificationMessage(`Created a new blog: User ${user.username} posted '${blog.title}' by ${author}!`);
+            setTimeout(() => {
+                setNotificationMessage(null);
+            }, 5000);
+        } catch (exception) {
+            setErrorMessage('Error occurred while creating a blog: Blog creation halted.');
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 5000);
+        }
     }
 
     const loginForm = () => {
@@ -140,6 +178,8 @@ const App = () => {
     return (
         <div>
             <h1>Blog App</h1>
+            <Error message={errorMessage} />
+            <Notification message={notificationMessage} />
             {user === null ?
                 loginForm() :
                 <div>
