@@ -1,0 +1,8 @@
+post http://localhost:3001/api/notes
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpoZWlub24xNyIsImlkIjoiNjA4ZjEwYWI2ZjVlMDEyZTY0NmI3MTkwIiwiaWF0IjoxNjIwMDQwNDc5LCJleHAiOjE2MjAwNDQwNzl9.yGQYH46gJU06bx47WeUwhE8xI8kgbuBG5hzOPun0-YA
+
+{
+    "content": "Lorem ipsum dolor sit amet...",
+    "important": false
+}

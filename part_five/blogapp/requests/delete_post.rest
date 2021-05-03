@@ -1,0 +1,10 @@
+post http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdpcmRldXgiLCJpZCI6IjYwOGQ2ZWY4OTNjYWFlNDQ2NDgzNzM1NCIsImlhdCI6MTYxOTk2NTM3OH0.XlmMHpkLmYTTRZZGafM66s-JhPmnvIv8wBbBej5YqMI
+
+{
+    "title": "Default title",
+    "url": "https://www.iltalehti.fi/",
+    "likes": 5,
+    "user": ""
+}
