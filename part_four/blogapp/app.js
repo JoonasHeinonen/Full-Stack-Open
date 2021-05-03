@@ -23,7 +23,7 @@ mongoose.connect(
         useFindAndModify: false, 
         useCreateIndex: true 
     });
-
+app.use(middleware.tokenExtractor);
 
 app.use(cors());
 app.use(express.json());

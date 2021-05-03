@@ -1,10 +1,11 @@
 post http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdpcmRldXgiLCJpZCI6IjYwOGQ2ZWY4OTNjYWFlNDQ2NDgzNzM1NCIsImlhdCI6MTYxOTk2NTM3OH0.XlmMHpkLmYTTRZZGafM66s-JhPmnvIv8wBbBej5YqMI
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpoZWlub24xNyIsImlkIjoiNjA5MDExMGJiZTU0MWEyMjYwMWVjMzRlIiwiaWF0IjoxNjIwMDcwNDk3fQ.1y_oZI3CYcY-nC2JAXOJI4ms8dZEVPvF0SqR8m-swYs
 
 {
     "title": "Default title",
     "url": "https://www.iltalehti.fi/",
     "likes": 5,
-    "user": ""
+    "author": "author",
+    "user": "Author"
 }

@@ -11,14 +11,14 @@ blogRouter.get('/', async(req, res) => {
     res.json(blogs.map(blog => blog.toJSON()));
 });
 
-blogRouter.post('/', async(req, res, next) => {
+blogRouter.post('/', async(req, res) => {
     const body = req.body;
 
     const decodedToken = jwt.verify(req.token, config.SECRET);
-    if (!req.token || !decodedToken.id) {
+    if (!req.token ||!decodedToken.id) {
         return res.status(401).json({ err: 'token missing or invalid' });
     }
-    const user = await User.findById(body.user);
+    const user = await User.findById(decodedToken.id);
 
     const blog = new Blog({
         title: body.title,
