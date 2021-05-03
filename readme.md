@@ -52,3 +52,7 @@ The completed assignemnts can be reviewed directly from commit history on the ma
         * Assignments 4.1, 4.2, 4.3 and 4.4. (Done. The folder for the project is 'blogapp' Express-project.)
     * Part 4b ( Osa 4b ):
         * Assignemnts 4.8, 4.9, 4.10, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18, 4.19, 4.20 and 4.21. (Done. The folder for the project is 'blogapp' Express-project. Attempted 4.11 - 4.12, but they led to failure.)
+
+* Part Four ( Osa 4, folder 'part_five'  ):
+    * Part 5a ( Osa 5a ):
+        * Assignment 5.1. (Done. The folder for the project is in 'blogapp' with the foldername 'bloglist-frontend'.)
