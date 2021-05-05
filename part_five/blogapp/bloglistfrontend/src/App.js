@@ -4,6 +4,7 @@ import Blog from './components/Blog';
 import Notification from './components/Notification';
 import Error from './components/Error';
 import LoginForm from './components/Login';
+import BlogForm from './components/BlogForm';
 
 import blogService from './services/blogs';
 import loginService from './services/login';
@@ -13,6 +14,7 @@ const App = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [notificationMessage, setNotificationMessage] = useState(null);
     const [loginVisible, setLoginVisible] = useState(false);
+    const [blogFormVisible, setBlogFormVisible] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [user, setUser] = useState(null);
@@ -83,8 +85,6 @@ const App = () => {
     };
 
     const createBlog = async (e) => {
-        e.preventDefault();
-
         try {
             const blog = {
                 user: user,
@@ -137,49 +137,21 @@ const App = () => {
     };
 
     const blogForm = () => {
-        const hideWhenVisible = { display : loginVisible ? 'none' : '' };
-        const showWhenVisible = { display : loginVisible ? '' : 'none' };
+        const hideWhenVisible = { display : blogFormVisible ? 'none' : '' };
+        const showWhenVisible = { display : blogFormVisible ? '' : 'none' };
 
         return (
             <div>
                 <div style={hideWhenVisible}>
-                    <button onClick={() => setLoginVisible(true)}>Create new blog</button>
+                    <button onClick={() => setBlogFormVisible(true)}>Create new blog</button>
                 </div>
                 <div style={showWhenVisible}>
-                    <form onSubmit={createBlog}>
-                        <div>
-                            title
-                            <input
-                                type='text'
-                                value={title}
-                                name='Title'
-                                onChange={({ target }) => setTitle(target.value)}
-                            />
-                        </div>
-                        <div>
-                            author
-                            <input
-                                type='text'
-                                value={author}
-                                name='Author'
-                                onChange={({ target }) => setAuthor(target.value)}
-                            />
-                        </div>
-                        <div>
-                            url
-                            <input
-                                type='text'
-                                value={url}
-                                name='Url'
-                                onChange={({ target }) => setUrl(target.value)}
-                            />
-                        </div>
-                        <div>
-                            <button type='submit'>Create</button>
-                            <button onClick={() => setLoginVisible(false)}>cancel</button>
-                        </div>
-
-                    </form>
+                    <BlogForm 
+                        createBlog={createBlog}
+                    />
+                    <div>
+                        <button onClick={() => setBlogFormVisible(false)}>cancel</button>
+                    </div>
                 </div>
             </div>  
         );
