@@ -29,7 +29,7 @@ const BlogForm = ({ createBlog }) => {
         setTitle('');
         setAuthor('');
         setUrl('');
-    }
+    };
 
     return (
         <div>
@@ -67,6 +67,6 @@ const BlogForm = ({ createBlog }) => {
             </form>
         </div>
     );
-}
+};
 
 export default BlogForm;

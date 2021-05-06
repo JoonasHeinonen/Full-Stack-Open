@@ -29,12 +29,12 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-      const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
-      if (loggedUserJSON) {
-          const user = JSON.parse(loggedUserJSON);
-          setUser(user);
-          blogService.setToken(user.token);
-      }
+        const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
+        if (loggedUserJSON) {
+            const user = JSON.parse(loggedUserJSON);
+            setUser(user);
+            blogService.setToken(user.token);
+        }
     }, []);
 
     const handleLogin = async (e) => {
@@ -44,16 +44,16 @@ const App = () => {
             const user = await loginService.login({
                 username, password
             });
-    
+
             window.localStorage.setItem(
                 'loggedBlogappUser', JSON.stringify(user)
             );
-    
+
             blogService.setToken(user.token);
             setUser(user);
             setUsername('');
             setPassword('');
-    
+
             setNotificationMessage(`${user.username} logged in!`);
             setTimeout(() => {
                 setNotificationMessage(null);
@@ -77,14 +77,14 @@ const App = () => {
                 setNotificationMessage(null);
             }, 5000);
         } catch (exception) {
-            setErrorMessage(`Logging out was insuccessful.`);
+            setErrorMessage('Logging out was insuccessful.');
             setTimeout(() => {
                 setErrorMessage(null);
             }, 5000);
         }
     };
 
-    const createBlog = async (e) => {
+    const createBlog = async () => {
         try {
             const blog = {
                 user: user,
@@ -92,9 +92,9 @@ const App = () => {
                 author: author,
                 url: url
             };
-    
+
             const auth = user.token;
-    
+
             const newBlog = await blogService.create(blog, auth);
             setBlogs(blogs.concat(newBlog));
             setTitle('');
@@ -111,7 +111,7 @@ const App = () => {
                 setErrorMessage(null);
             }, 5000);
         }
-    }
+    };
 
     const loginForm = () => {
         const hideWhenVisible = { display : loginVisible ? 'none' : '' };
@@ -146,14 +146,14 @@ const App = () => {
                     <button onClick={() => setBlogFormVisible(true)}>Create new blog</button>
                 </div>
                 <div style={showWhenVisible}>
-                    <BlogForm 
+                    <BlogForm
                         createBlog={createBlog}
                     />
                     <div>
                         <button onClick={() => setBlogFormVisible(false)}>cancel</button>
                     </div>
                 </div>
-            </div>  
+            </div>
         );
     };
 

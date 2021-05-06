@@ -14,17 +14,13 @@ const getAll = () => {
 
 const create = async (newObject, auth) => {
     setToken(auth);
-    
+
     const config = {
         headers: { Authorization: token },
     };
 
     const res = await axios.post(baseUrl, newObject, config);
     return res.data;
-};
-
-const deleteBlog = async (auth) => {
-
 };
 
 const update = (blog, newBlog) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import blogService from '../services/blogs'
+import blogService from '../services/blogs';
 
-const Blog = ({ blog }) => {
+const Blog = React.forwardRef(({ blog }) => {
     const blogStyle = {
         paddingTop: 10,
         paddingLeft: 2,
@@ -11,15 +11,13 @@ const Blog = ({ blog }) => {
     };
 
     const [blogVisible, setBlogVisible] = useState(false);
-    const [postedBy, setPostedBy] = useState('')
-    const [username, setUsername] = useState('')
 
     const hideWhenVisible = { display : blogVisible ? 'none' : '' };
     const showWhenVisible = { display : blogVisible ? '' : 'none' };
 
     const likeBlog = async (e) => {
         e.preventDefault();
-        
+
         const newBlog = {
             id: blog.id,
             user: blog.user,
@@ -45,13 +43,15 @@ const Blog = ({ blog }) => {
                     <p>{blog.title} {blog.author}</p>
                     <a href='/'>{blog.url}</a>
                     <p>Likes: {blog.likes}<button type='submit' onClick={likeBlog}>like</button></p>
-                    <p>Posted by: {blog.user?.name}
+                    <p>Posted by:
                     </p>
                     <button onClick={() => setBlogVisible(false)}>hide</button>
                 </div>
-            </div>  
-        </div>  
+            </div>
+        </div>
     );
-};
+});
+
+Blog.displayName = 'Blog';
 
 export default Blog;
