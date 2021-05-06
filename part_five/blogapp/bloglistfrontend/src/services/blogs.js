@@ -10,7 +10,7 @@ const setToken = newToken => {
 const getAll = () => {
     const request = axios.get(baseUrl);
     return request.then(response => response.data);
-}
+};
 
 const create = async (newObject, auth) => {
     setToken(auth);
@@ -21,6 +21,18 @@ const create = async (newObject, auth) => {
 
     const res = await axios.post(baseUrl, newObject, config);
     return res.data;
-}
+};
 
-export default { setToken, getAll, create };
+const deleteBlog = async (auth) => {
+
+};
+
+const update = (blog, newBlog) => {
+    const req = axios.put(`${baseUrl}/${blog.id}`, newBlog);
+
+    return req.then(
+        res => res.data
+    );
+};
+
+export default { setToken, getAll, create, update };
