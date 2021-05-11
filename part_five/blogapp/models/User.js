@@ -37,6 +37,4 @@ userSchema.set('toJSON', {
     }
 });
 
-// 607d7f86a41abc411cd623c6 - Matti Luukkainen
-
 module.exports = mongoose.model('User', userSchema);

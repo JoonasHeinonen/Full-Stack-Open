@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/User');
 const helper = require('./blog_test_helper');
 const supertest = require('supertest');
 
